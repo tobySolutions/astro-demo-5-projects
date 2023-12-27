@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Default.astro';
+import Counter from "../components/Counter";
+import Carousel from "../components/Carousel";
+import Form from "../components/Form.astro";
+import Todo from "../components/Todo"
+import MovieFinder from "../components/MovieFinder"
+
+const images = await fetch(
+        "https://picsum.photos/v2/list?page=21&limit=8"
+      ).then(res => res.json());
+
+
+	  const fetchMovies =  await fetch(
+        `https://api.themoviedb.org/3/search/movie?query=${"interstellar"}&api_key=7375b3162ed1bb2f24bb965386019997`
+      ).then(res => res.json()).catch(err => console.error(err))
+
+---
+<Layout title="Toby">
+    <p>Hello from Index!</p>
+	<Counter client:load/>
+	<Carousel client:load images={images}/>
+	<Form />
+	<Todo client:load />
+	<MovieFinder client:load fetchMovies={fetchMovies}/>
+</Layout>

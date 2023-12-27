@@ -1,0 +1,30 @@
+---
+const errors = { username: "" }
+
+if (Astro.request.method === 'POST') {
+    const data = await Astro.request.formData()
+    const username = data.get('username')
+    if (typeof username !== "string" || username.length === 0){
+       errors.username = "username not valid"
+    }
+
+}
+---
+<p>Form:</p>
+<form method="POST">
+    <label class="text-red-600">
+      Username:
+      <input id="username" type="text" name="username" required/>
+      <p id='errors'></p>
+    </label>
+    <button>Submit</button>
+</form>
+
+<script is:inline>
+    const el = document.getElementById('username')
+    el.addEventListener("input", () => {
+        if (el.value.length === 0) {
+            document.getElementById('errors').textContent = 'name not valid'
+        }
+    })
+</script>

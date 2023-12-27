@@ -1,0 +1,10 @@
+---
+const links = [
+    {href: '/about', title: "About"},
+    {href: "/", title: 'Home'}
+]
+---
+
+<ul>
+    {links.map(link => (<li><a href={link.href}>{link.title}</a></li>))}
+</ul>
